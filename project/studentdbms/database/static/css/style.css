@@ -264,6 +264,8 @@ footer p {
     padding: 10px;
     transition: 0.5s;
     margin: 5px 0;
+    border: none;
+    font-weight: bold;
 }
 
 .search:hover{
@@ -274,11 +276,13 @@ footer p {
 
 
 .delete-btn{
-    background-color: #D47C56;
+    background-color: #b30d0d;
     color: black;
     border-radius: 5px;
     padding: 5px;
     transition: 0.5s;
+    border: none;
+    font-weight: bold;
 }
 
 .delete-btn:hover{
@@ -303,10 +307,16 @@ footer p {
 #studentTable{
     background-color: rgb(26, 25, 25);
     color: white;
+
+}
+
+#studentTable th,td{
+    padding: 5px;
 }
 
 #searchTable{
     margin: 10px 0;
+    text-align: center;
 }
 
 /* Responsive Design */
