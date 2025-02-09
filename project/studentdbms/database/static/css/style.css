@@ -257,6 +257,37 @@ footer p {
     border-right: 2px solid black;
 }
 
+.search{
+    background-color: #D47C56;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.5s;
+    margin: 5px 0;
+}
+
+.search:hover{
+    transform: scale(1.08);
+    transition: ease-in-out 0.5s;
+    background-color: #ac5d3c;
+}
+
+
+.delete-btn{
+    background-color: #D47C56;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    transition: 0.5s;
+}
+
+.delete-btn:hover{
+    transform: scale(1.08);
+    transition: ease-in-out 0.5s;
+    background-color: #ac5d3c;
+
+}
+
 
 /*About*/
 
@@ -264,6 +295,18 @@ footer p {
     background-color: #111111;
     color: white;
     padding: 10px;
+    margin: 8px 0;
+}
+
+
+/*StudentTable*/
+#studentTable{
+    background-color: rgb(26, 25, 25);
+    color: white;
+}
+
+#searchTable{
+    margin: 10px 0;
 }
 
 /* Responsive Design */

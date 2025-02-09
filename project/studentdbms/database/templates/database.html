@@ -6,7 +6,6 @@
   <article>
     <h1>Student Database</h1>
 
-    <!-- Display Success Message -->
     {% if messages %}
     <div id="messageContainer">
       {% for message in messages %}
@@ -31,7 +30,6 @@
 <script>
     console.log("Student Database Loaded");
 
-    // Hide success message after 3 seconds
     setTimeout(() => {
         let messageDiv = document.getElementById("messageContainer");
         if (messageDiv) messageDiv.style.display = "none";

@@ -9,6 +9,7 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('database/',views.database, name="database"),
     path('view/',views.view, name="view"),
+     path('delete-student/<int:student_id>/', views.delete_student, name='delete_student'),
 ]
 
 if settings.DEBUG:
