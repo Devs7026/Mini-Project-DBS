@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>Student Database</h1>
+
+    <!-- Display Success Message -->
+    {% if messages %}
+    <div id="messageContainer">
+      {% for message in messages %}
+        <p class="success-message">{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+      <div class="column">
+        <h2>Add Student</h2>
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" id="button" value="Add Student">
+        </form>
+      </div>
+    </div>
+  </article>
+</section>
+
+<script>
+    console.log("Student Database Loaded");
+
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+        let messageDiv = document.getElementById("messageContainer");
+        if (messageDiv) messageDiv.style.display = "none";
+    }, 3000);
+</script>
+
+<style>
+  .success-message {
+    color: green;
+    font-weight: bold;
+    background-color: #e6ffe6;
+    padding: 10px;
+    border-radius: 5px;
+  }
+</style>
+
+{% endblock %}
+

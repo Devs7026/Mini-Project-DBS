@@ -1,0 +1,27 @@
+{% load static %}
+<style>
+  @keyframes colorChange {
+    0% { color: red; }
+    25% { color: blue; }
+    50% { color: green; }
+    75% { color: orange; }
+    100% { color: red; }
+  }
+
+   header h1 {
+    animation: colorChange 3s infinite;
+    transition: color 0.8s ease-in-out;
+  }
+</style>
+
+<header>
+  <h1>Mini DataBase Project</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'database' %}"> Database</a></li>
+    <li><a href="{% url 'view' %}">View</a></li>
+  </ul>
+</nav>

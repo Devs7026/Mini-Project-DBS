@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+    <article>
+      <div class="row">
+        <div class="column">
+          <h2>Search Student</h2>
+          <input type="text" id="searchInput" placeholder="Enter student name..." onkeyup="searchStudent()">
+          <div id="searchResult"></div>
+        </div>
+      </div>
+          <div class="row">
+            <div class="column">
+              <h2>All Students</h2>
+              <label for="sortSelect">Sort By:</label>
+              <select id="sortSelect" onchange="sortTable()">
+                <option value="name">Name (A-Z)</option>
+                <option value="cgpa">CGPA (High to Low)</option>
+              </select>
+      
+              <table id="studentTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Course</th>
+                    <th>CGPA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for student in students %}
+                  <tr>
+                    <td>{{ student.id }}</td>
+                    <td class="name">{{ student.name }}</td>
+                    <td>{{ student.dob }}</td>
+                    <td>{{ student.course }}</td>
+                    <td class="cgpa">{{ student.cgpa }}</td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="5">No students found.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </article>
+</section>
+
+<script>
+   console.log("Student Database Loaded");
+
+// Convert DOB input to date type
+document.getElementById("dob")?.setAttribute("type", "date");
+
+function searchStudent() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let table = document.getElementById("studentTable");
+        let rows = table.getElementsByTagName("tr");
+        let resultDiv = document.getElementById("searchResult");
+
+        resultDiv.innerHTML = "";
+        for (let i = 1; i < rows.length; i++) {
+            let nameCell = rows[i].getElementsByClassName("name")[0];
+            if (nameCell) {
+                let name = nameCell.innerText.toLowerCase();
+                if (name.includes(input)) {
+                    resultDiv.innerHTML += `<p><strong>${nameCell.innerText}</strong> found in the list.</p>`;
+                    return;
+                }
+            }
+        }
+        if (input.length > 0) resultDiv.innerHTML = "<p>No matching student found.</p>";
+    }
+
+    // Sorting Functionality
+    function sortTable() {
+        let table = document.getElementById("studentTable");
+        let rows = Array.from(table.getElementsByTagName("tr")).slice(1);
+        let sortType = document.getElementById("sortSelect").value;
+        
+        rows.sort((a, b) => {
+            let valueA, valueB;
+            if (sortType === "name") {
+                valueA = a.getElementsByClassName("name")[0].innerText.toLowerCase();
+                valueB = b.getElementsByClassName("name")[0].innerText.toLowerCase();
+                return valueA.localeCompare(valueB);
+            } else {
+                valueA = parseFloat(a.getElementsByClassName("cgpa")[0].innerText);
+                valueB = parseFloat(b.getElementsByClassName("cgpa")[0].innerText);
+                return valueB - valueA; // Sort CGPA in descending order
+            }
+        });
+
+        let tbody = table.getElementsByTagName("tbody")[0];
+        rows.forEach(row => tbody.appendChild(row));
+    }
+</script>
+
+{% endblock %}

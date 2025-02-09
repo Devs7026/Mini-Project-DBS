@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section style="text-align: center; padding: 50px;">
+    <h1 id="typing-text" style="font-size: 30px;"></h1>
+</section>
+
+<section id="animated-section" style="text-align: center; padding: 50px; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+    <h2>Discover More Features</h2>
+    <p>Explore the powerful capabilities of our Mini Database Project and enhance your data management experience.</p>
+</section>
+<section>
+    <h1>Our Location:</h1>
+
+    <article>
+        <p>Manipal Institute of Technology, Bengaluru-560064</p>
+        <div class="column">
+          <div class="videowrap">
+            <iframe
+            width="600"
+            height="450"
+            style="border:0; border-radius: 10px;"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62227.648740927785!2d77.554255!3d13.133082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae197ca0d0b2b7%3A0x3c7b3b9c3ec2f7d7!2sBSF%20Campus%2C%20Yelahanka%2C%20Govindapura%2C%20Bengaluru%2C%20Karnataka%20560064!5e0!3m2!1sen!2sin!4v1707322342345!5m2!1sen!2sin">
+        </iframe>
+        
+        
+
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+<style>
+    .highlight {
+        color: #ff5733; /* Change to your desired color */
+        font-weight: bold;
+    }
+    .important {
+        color: #007bff; /* Another color */
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sentence = [
+            "Welcome to The <span class='important'> Mini DataBase Project</span>, a simple <span class='highlight'>Student Database Management System</span> for managing ",
+            "Students. Browse, search, and manage ",
+            "records efficiently!"
+        ];
+
+        let index = 0;
+        let partIndex = 0;
+        let currentPart = "";
+        const typingText = document.getElementById("typing-text");
+
+        function typeEffect() {
+            if (partIndex < sentence.length) {
+                if (index < sentence[partIndex].length) {
+                    currentPart += sentence[partIndex].charAt(index);
+                    typingText.innerHTML = currentPart;
+                    index++;
+                    setTimeout(typeEffect, 30); // Adjust typing speed
+                } else {
+                    partIndex++;
+                    index = 0;
+                    setTimeout(typeEffect, 50); // Pause before the next part
+                }
+            } else {
+                // Show animated section after typing is complete
+                setTimeout(() => {
+                    const animatedSection = document.getElementById("animated-section");
+                    animatedSection.style.opacity = "1";
+                    animatedSection.style.transform = "translateY(0)";
+                }, 500);
+            }
+        }
+
+        typeEffect();
+    });
+</script>
+{% endblock %}

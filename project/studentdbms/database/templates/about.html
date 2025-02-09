@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>About Us</h1>
+    <img src="{% static 'img/Img1.jpg' %}" alt="Image1">
+        <p>
+          Welcome to the Mini Database Project, created by Dev & Neel!
+          We are passionate developers dedicated to building efficient and user-friendly web applications. This project was designed to simplify student data management and provide a practical learning experience in database handling, Django development.
+        </p>
+  </article>
+  <article>
+    <h1>Project Synopsis</h1>
+    <img src="{% static 'img/Img2.jpg' %}" alt="Image2">
+    <p>The Mini Database Project is a simple and efficient student management system that allows users to add, search, and manage student records. Designed with an easy-to-use interface, this web-based application enables users to input student details such as ID, name, date of birth, course, and CGPA. It also features a search functionality to quickly retrieve student records. This project serves as a foundational system for understanding database operations and web development using Django.</p>
+  </article>
+</section>
+{% endblock %}
