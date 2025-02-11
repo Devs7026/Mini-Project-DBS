@@ -4,6 +4,8 @@ from .models import Student
 from .forms import StudentForm
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 
@@ -32,6 +34,5 @@ def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     student.delete()
     return JsonResponse({'success': True})
-
 
 
