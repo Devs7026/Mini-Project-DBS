@@ -288,8 +288,38 @@ footer p {
 .delete-btn:hover{
     transform: scale(1.08);
     transition: ease-in-out 0.5s;
-    background-color: #ac5d3c;
 
+}
+
+.update-btn{
+    background-color: green;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    transition: 0.5s;
+    border: none;
+    font-weight: bold;
+}
+
+.update-btn:hover{
+    transform: scale(1.08);
+    transition: ease-in-out 0.5s;
+}
+
+#toggleStudentsButton{
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    transition: 0.5s;
+    border: none;
+    font-weight: bold;
+}
+
+#toggleStudentsButton:hover{
+    transform: scale(1.05);
+    transition: ease-in-out 0.5s;
+    background-color: #444444;
 }
 
 

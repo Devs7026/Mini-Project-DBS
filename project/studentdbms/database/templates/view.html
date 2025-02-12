@@ -41,7 +41,7 @@
                 <option value="name">Name (A-Z)</option>
                 <option value="cgpa">CGPA (High to Low)</option>
               </select>
-      
+              <button id="toggleStudentsButton" onclick="toggleStudents()">Show Students</button>
               <table id="studentTable">
                 <thead>
                   <tr>
@@ -64,7 +64,8 @@
                     <td>{{ student.course }}</td>
                     <td class="cgpa">{{ student.cgpa }}</td>
                     <td>
-                      
+                        <button class="update-btn" onclick="editStudent(parseInt('{{ student.id }}'))">Update</button>
+
                       <button class="delete-btn" data-id="{{ student.id }}" onclick="deleteStudent(this)">Delete</button>
                     </td>
                   </tr>
@@ -78,6 +79,26 @@
 
               <h3>Deletion Log</h3>
               <ul id="deletionLog"></ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <h2>Update Student</h2>
+              <form id="updateForm" style="display: none;" onsubmit="saveStudentChanges(event)">
+                <input type="hidden" id="updateStudentId">
+                <label>Name:</label>
+                <input type="text" id="updateName">
+                <label>Email:</label>
+                <input type="email" id="updateEmail">
+                <label>DOB:</label>
+                <input type="date" id="updateDOB">
+                <label>Course:</label>
+                <input type="text" id="updateCourse">
+                <label>CGPA:</label>
+                <input type="number" step="0.01" id="updateCGPA">
+                <button type="submit">Save Changes</button>
+              </form>
             </div>
           </div>
     </article>
@@ -180,5 +201,92 @@ function logDeletion(name, id) {
     logItem.innerText = `Deleted: ${name} (ID: ${id})`;
     logList.appendChild(logItem);
 }
+
+
+function editStudent(studentId) {
+    let row = document.getElementById("studentRow" + studentId);
+    let name = row.getElementsByClassName("name")[0].innerText;
+    let email = row.cells[2].innerText;
+    let dob = row.cells[3].innerText;
+    let course = row.cells[4].innerText;
+    let cgpa = row.cells[5].innerText;
+
+    let formattedDOB = new Date(dob);
+
+    // Populate update form
+    document.getElementById("updateStudentId").value = studentId;
+    document.getElementById("updateName").value = name;
+    document.getElementById("updateEmail").value = email;
+    document.getElementById("updateDOB").valueAsDate = formattedDOB;  
+    document.getElementById("updateCourse").value = course;
+    document.getElementById("updateCGPA").value = cgpa;
+
+    // Show update form
+    document.getElementById("updateForm").style.display = "block";
+}
+
+function saveStudentChanges(event) {
+    event.preventDefault(); // Prevent page reload
+
+    let studentId = document.getElementById("updateStudentId").value;
+    let updatedData = {
+        name: document.getElementById("updateName").value,
+        email: document.getElementById("updateEmail").value,
+        dob: document.getElementById("updateDOB").value,
+        course: document.getElementById("updateCourse").value,
+        cgpa: document.getElementById("updateCGPA").value
+    };
+
+    fetch(`/update-student/${studentId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateTable(studentId, updatedData);
+            document.getElementById("updateForm").style.display = "none";
+            alert("Student updated successfully!");
+        } else {
+            alert("Error updating student!");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+function updateTable(studentId, updatedData) {
+    let row = document.getElementById("studentRow" + studentId);
+    row.getElementsByClassName("name")[0].innerText = updatedData.name;
+    row.cells[2].innerText = updatedData.email;
+    row.cells[3].innerText = updatedData.dob;
+    row.cells[4].innerText = updatedData.course;
+    row.cells[5].innerText = updatedData.cgpa;
+}
+
+
+// Ensure the table is hidden on page load
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("studentTable").style.display = "none";
+});
+
+function toggleStudents() {
+    let table = document.getElementById("studentTable");
+    let button = document.getElementById("toggleStudentsButton");
+
+    if (table.style.display === "none") {
+        table.style.display = "table";
+        button.innerText = "Hide Students";
+    } else {
+        table.style.display = "none";
+        button.innerText = "Show Students";
+    }
+}
+
+
+
 </script>
 {% endblock %}

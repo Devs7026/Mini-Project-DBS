@@ -36,3 +36,19 @@ def delete_student(request, student_id):
     return JsonResponse({'success': True})
 
 
+@csrf_exempt  # Disable CSRF for testing (use @csrf_protect in production)
+def update_student(request, student_id):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            student = Student.objects.get(id=student_id)
+            student.name = data["name"]
+            student.email = data["email"]
+            student.dob = data["dob"]
+            student.course = data["course"]
+            student.cgpa = data["cgpa"]
+            student.save()
+            return JsonResponse({"success": True})
+        except Student.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Student not found"})
+    return JsonResponse({"success": False, "error": "Invalid request"})

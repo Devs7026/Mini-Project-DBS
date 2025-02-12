@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import update_student
 
 
 urlpatterns = [
@@ -10,6 +11,7 @@ urlpatterns = [
     path('database/',views.database, name="database"),
     path('view/',views.view, name="view"),
      path('delete-student/<int:student_id>/', views.delete_student, name='delete_student'),
+     path('update-student/<int:student_id>/', update_student, name="update_student"),
 ]
 
 if settings.DEBUG:
