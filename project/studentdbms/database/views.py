@@ -1,42 +1,62 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from .models import Student
 from .forms import StudentForm
-from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-# Create your views here.
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
 
+        if user is not None:
+            login(request, user)
+            return redirect("home/") 
+        else:
+            messages.error(request, "Invalid username or password")
+    
+    return render(request, "login.html")  
+
+
+@login_required
 def home(request):
-    return render(request, 'index.html')
+    return render(request, "index.html")
 
+@login_required
 def about(request):
-    return render(request, 'about.html')
+    return render(request, "about.html")
 
+@login_required
 def database(request):
     form = StudentForm()
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Student added to the database successfully!")
+            messages.success(request, "Student added successfully!")
             return redirect('database')
 
     return render(request, 'database.html', {'form': form})
 
+@login_required
 def view(request):
     students = Student.objects.all()
     return render(request, 'view.html', {'students': students})
 
+@login_required
 def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     student.delete()
     return JsonResponse({'success': True})
 
-
-@csrf_exempt  # Disable CSRF for testing (use @csrf_protect in production)
+@csrf_exempt
+@login_required
 def update_student(request, student_id):
     if request.method == "POST":
         try:
