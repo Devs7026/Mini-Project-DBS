@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Page</title>
     <style>
         /* General Reset */
         * { 
@@ -43,10 +43,15 @@
         }
 
         /* Input Fields */
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
         input { 
             width: 100%; 
             padding: 12px; 
-            margin: 5px 0; 
             border: 2px solid transparent; 
             border-radius: 8px;
             background: #333; 
@@ -59,6 +64,21 @@
         /* Input Focus Effect */
         input:focus {
             border-color: #007bff;
+        }
+
+        /* Eye Icon Styling */
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .eye-icon:hover {
+            color: #fff;
         }
 
         /* Button Styling */
@@ -108,11 +128,34 @@
         {% endif %}
         <form method="POST" action="">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <span class="eye-icon" onclick="togglePassword()"><i id="eyeIcon" class="fa-regular fa-eye"></i></span>
+            </div>
             <button type="submit">Login</button>
         </form>
     </div>
+
+    <script>
+       function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/e97095fee3.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

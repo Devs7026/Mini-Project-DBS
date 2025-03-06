@@ -349,6 +349,47 @@ footer p {
     text-align: center;
 }
 
+
+#id_department{
+    background-color: #111111;
+    color: white;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+#id_course{
+    background-color: #111111;
+    color: white;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+#updateCourse{
+    background-color: #111111;
+    color: white;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+
+#updateDepartment{
+    background-color: #111111;
+    color: white;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+#sbtn{
+    background-color: #D47C56;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.5s;
+    margin: 5px 0;
+    border: none;
+    font-weight: bold;
+}
+
 /* Responsive Design */
 @media (max-width: 800px) {
     section {
