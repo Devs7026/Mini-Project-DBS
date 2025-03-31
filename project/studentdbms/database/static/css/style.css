@@ -390,6 +390,34 @@ footer p {
     font-weight: bold;
 }
 
+.btn-primary{
+    background-color: #D47C56;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.5s;
+    margin: 5px 0;
+    border: none;
+    font-weight: bold;
+}
+
+
+.attendance-table td{
+    color: black;
+}
+
+.date-selection{
+    color: black;
+}
+
+.attendBtn{
+    color: white;
+    background: #007bff;
+}
+
+.attendBtn:hover{
+    background: #0056b3;
+}
 /* Responsive Design */
 @media (max-width: 800px) {
     section {

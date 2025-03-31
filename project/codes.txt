@@ -1,0 +1,16 @@
+python manage.py runserver
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+cd project
+venv\Scripts\activate
+cd studentdbms
+
+
+mysql -u root -p
+
+
+dev
+devs@1501

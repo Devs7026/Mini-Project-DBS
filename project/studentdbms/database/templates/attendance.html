@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="main-section">
+ <article>
+ <div class="container">
+ <div class="section">
+ <h2 class="title">Student Attendance</h2>
+ </div>
+
+ <form method="post">
+ {% csrf_token %}
+
+ <!-- Date Selection -->
+ <div class="date-selection">
+ <label for="attendanceDate">Select Date:</label>
+ <input type="date" id="attendanceDate" name="attendanceDate">
+ </div>
+
+ <div class="attendance-sheet">
+ <table class="attendance-table">
+ <thead>
+ <tr>
+ <th>Student Name</th>
+ <th>Present</th>
+ </tr>
+ </thead>
+ <tbody>
+ {% for student in students %}
+ <tr>
+ <td>{{ student.name }}</td>
+ <td><input type="checkbox" name="attendance_{{ student.id }}" value="present"></td>
+ </tr>
+ {% endfor %}
+ </tbody>
+ </table>
+ <button type="submit" class="attendBtn">Submit Attendance</button>
+ </div>
+ </div>
+ </article>
+</section>
+
+<style>
+ /* General Styles */
+ .main-section {
+ background-color: #f8f9fa;
+ padding: 20px;
+ }
+
+ .container {
+ max-width: 960px;
+ margin: 0 auto;
+ }
+
+ .section {
+ margin-bottom: 20px;
+ }
+
+ .title {
+ font-size: 2rem;
+ color: #343a40;
+ text-align: center;
+ }
+
+ /* Date Selection Styles */
+ .date-selection {
+ margin-bottom: 15px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ /* Center horizontally */
+ gap: 10px;
+ }
+
+ .date-selection label {
+ font-weight: bold;
+ }
+
+ .date-selection input[type="date"] {
+ padding: 8px;
+ border: 1px solid #ced4da;
+ border-radius: 4px;
+ }
+
+ /* Attendance Sheet Styles */
+ .attendance-sheet {
+ overflow-x: auto;
+ }
+
+ .attendance-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin-bottom: 15px;
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ border-radius: 8px;
+ overflow: hidden;
+ }
+
+ .attendance-table th,
+ .attendance-table td {
+ padding: 12px 15px;
+ text-align: left;
+ border-bottom: 1px solid #dee2e6;
+ }
+
+ .attendance-table th {
+ background-color: #007bff;
+ color: #fff;
+ font-weight: 500;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ }
+
+ .attendance-table tbody tr:nth-child(even) {
+ background-color: #f2f2f2;
+ }
+
+ .attendance-table td input[type="checkbox"] {
+ margin: 0;
+ }
+
+ .attendance-table td input[type="text"] {
+ width: 100%;
+ padding: 8px;
+ border: 1px solid #ced4da;
+ border-radius: 4px;
+ box-sizing: border-box;
+ }
+
+ /* Responsive Styles */
+ @media (max-width: 768px) {
+ .attendance-table {
+ font-size: 0.9rem;
+ }
+
+ .attendance-table th,
+ .attendance-table td {
+ padding: 8px 10px;
+ }
+ }
+
+ /* Button Styles */
+ .attendBtn {
+ display: inline-block;
+ padding: 10px 20px;
+ font-size: 16px;
+ font-weight: bold;
+ text-align: center;
+ text-decoration: none;
+ color: #fff;
+ background-color: #007bff;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+ }
+
+ .attendBtn:hover {
+ background-color: #0056b3;
+ }
+</style>
+
+<script>
+ // JavaScript can be added here for interactivity, e.g., form submission,
+ // dynamic updates, or client-side validation.
+</script>
+
+{% endblock %}

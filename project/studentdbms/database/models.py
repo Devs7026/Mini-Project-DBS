@@ -34,4 +34,13 @@ class Student(models.Model):
 
 
 
+class Attendance(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)  # Automatically set on creation
+    present = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = ('student', 'date') # One attendance entry per student per day
+
+    def __str__(self):
+        return f"{self.student.name} - {self.date} - {'Present' if self.present else 'Absent'}"

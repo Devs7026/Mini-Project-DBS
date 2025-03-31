@@ -6,27 +6,27 @@
     <title>Login Page</title>
     <style>
         /* General Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
 
         /* Fullscreen Centering */
-        body { 
+        body {
             display: flex;
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background: #121212;
         }
 
         /* Container with Animated Border */
-        .container { 
-            background: #1e1e1e; 
-            padding: 40px; 
-            border-radius: 12px; 
+        .container {
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 12px;
             text-align: center;
             width: 350px;
             border: 3px solid;
@@ -49,13 +49,13 @@
             margin-bottom: 10px;
         }
 
-        input { 
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid transparent; 
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid transparent;
             border-radius: 8px;
-            background: #333; 
-            color: #fff; 
+            background: #333;
+            color: #fff;
             font-size: 16px;
             outline: none;
             transition: all 0.3s ease-in-out;
@@ -82,22 +82,22 @@
         }
 
         /* Button Styling */
-        button { 
+        button {
             margin: 10px 0;
-            width: 100%; 
-            padding: 12px; 
-            background: #007bff; 
-            color: white; 
-            border: none; 
-            border-radius: 8px; 
-            font-size: 16px; 
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
         }
 
         /* Button Hover Effect */
-        button:hover { 
-            background: #0056b3; 
+        button:hover {
+            background: #0056b3;
         }
 
         /* Error Messages */
@@ -109,22 +109,46 @@
 
         /* Border Animation */
         @keyframes borderAnimation {
-            0% { border-image-source: linear-gradient(45deg, #ff5733, #ffcc33, #33ff57, #3399ff, #ff33cc); }
-            25% { border-image-source: linear-gradient(45deg, #ffcc33, #33ff57, #3399ff, #ff33cc, #ff5733); }
-            50% { border-image-source: linear-gradient(45deg, #33ff57, #3399ff, #ff33cc, #ff5733, #ffcc33); }
-            75% { border-image-source: linear-gradient(45deg, #3399ff, #ff33cc, #ff5733, #ffcc33, #33ff57); }
-            100% { border-image-source: linear-gradient(45deg, #ff33cc, #ff5733, #ffcc33, #33ff57, #3399ff); }
+            0% {
+                border-image-source: linear-gradient(45deg, #ff5733, #ffcc33, #33ff57, #3399ff, #ff33cc);
+            }
+
+            25% {
+                border-image-source: linear-gradient(45deg, #ffcc33, #33ff57, #3399ff, #ff33cc, #ff5733);
+            }
+
+            50% {
+                border-image-source: linear-gradient(45deg, #33ff57, #3399ff, #ff33cc, #ff5733, #ffcc33);
+            }
+
+            75% {
+                border-image-source: linear-gradient(45deg, #3399ff, #ff33cc, #ff5733, #ffcc33, #33ff57);
+            }
+
+            100% {
+                border-image-source: linear-gradient(45deg, #ff33cc, #ff5733, #ffcc33, #33ff57, #3399ff);
+            }
+        }
+
+        /* Admin Button Style */
+        .admin-button {
+            background: #28a745;
+        }
+
+        .admin-button:hover {
+            background: #218838;
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <h2>Welcome Back</h2>
         {% if messages %}
-            {% for message in messages %}
-                <p class="error-message">{{ message }}</p>
-            {% endfor %}
+        {% for message in messages %}
+        <p class="error-message">{{ message }}</p>
+        {% endfor %}
         {% endif %}
         <form method="POST" action="">
             {% csrf_token %}
@@ -137,10 +161,11 @@
             </div>
             <button type="submit">Login</button>
         </form>
+        <button type="button" class="admin-button" onclick="window.location.href='/admin'">Login as Admin</button>
     </div>
 
     <script>
-       function togglePassword() {
+        function togglePassword() {
             var passwordField = document.getElementById("password");
             var eyeIcon = document.getElementById("eyeIcon");
 
@@ -158,4 +183,5 @@
     <script src="https://kit.fontawesome.com/e97095fee3.js" crossorigin="anonymous"></script>
 
 </body>
+
 </html>
