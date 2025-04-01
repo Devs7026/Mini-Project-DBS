@@ -117,3 +117,6 @@ def update_student(request, student_id):
         except Student.DoesNotExist:
             return JsonResponse({"success": False, "error": "Student not found"})
     return JsonResponse({"success": False, "error": "Invalid request"})
+
+
+

@@ -73,6 +73,7 @@ nav {
     background-color: #2C2C2C;
     padding: 0.5rem 0;
     width: 100%;
+    border-radius: 20px;
 }
 
 nav ul {
