@@ -34,7 +34,13 @@
          <!-- Display attendance percentage -->
          <td>
            <div class="attendance-percent">
-             <div class="progress-bar" style="width: {{ student.attendance_percentage }}%;">
+             <!-- Conditional styling for progress bar -->
+             <div 
+               class="progress-bar" 
+               style="
+                 width: {{ student.attendance_percentage }}%;
+                 background-color: {% if student.attendance_percentage < 75 %}#dc3545{% else %}#007bff{% endif %};
+               ">
                {{ student.attendance_percentage }}%
              </div>
            </div>
@@ -136,7 +142,6 @@
 
  .progress-bar {
    height: 100%;
-   background-color: #007bff;
    color: white;
    text-align: center;
    line-height: 20px; /* Center text vertically */
