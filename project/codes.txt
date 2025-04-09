@@ -14,3 +14,7 @@ mysql -u root -p
 
 dev
 devs@1501
+
+DJANGO ADMIN LOGIN
+dev
+devs1501
