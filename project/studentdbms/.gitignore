@@ -1,0 +1,16 @@
+# Local env file
+.env
+
+# SQLite database
+/db.sqlite3
+/db.sqlite3-journal
+
+# Media and collected static
+/media/
+/staticfiles/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.eggs/
+*.egg-info/
